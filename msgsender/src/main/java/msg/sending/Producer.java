@@ -30,6 +30,11 @@ public class Producer {
             // Send a message to 'from endpoint'
             context.createProducerTemplate().sendBody("direct:start", "Hello, this is a test message with Camel!");
 
+            // Reveive the message from 'to endpoint'
+            // what type of object we are expecting
+            String message = context.createConsumerTemplate().receiveBody("activemq:queue:testQueue", String.class);
+            System.out.println("___________________"+message);
+
             // Stop the context
             context.stop();
         }
