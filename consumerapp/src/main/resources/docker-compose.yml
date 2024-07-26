@@ -1,0 +1,6 @@
+# activemq:
+#    image: rmohr/ActiveMQ
+#    container_name: ActiveMQ
+#    ports:
+#      -61616:61616
+#      -8080:8080

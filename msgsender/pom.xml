@@ -43,6 +43,19 @@
             <artifactId>activemq-client</artifactId>
             <version>5.16.3</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.camel/camel-jdbc -->
+        <!-- for SQL -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jdbc</artifactId>
+            <version>4.7.0</version>
+        </dependency>
+       <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>10.2.1.jre17</version>
+        </dependency>
+
     </dependencies>
     <build>
             <plugins>
