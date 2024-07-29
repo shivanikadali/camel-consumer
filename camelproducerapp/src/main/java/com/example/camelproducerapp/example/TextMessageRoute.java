@@ -1,4 +1,4 @@
-package com.example.consumerapp.example;
+package com.example.camelproducerapp.example;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
@@ -9,6 +9,7 @@ public class TextMessageRoute extends RouteBuilder {
     public void configure() throws Exception {
         from("direct:start")
                 .to("activemq:queue:testQueue")
+                .to("mock:testQueue")
                 .log("Message sent to testQueue: ${body}");
     }
 }
