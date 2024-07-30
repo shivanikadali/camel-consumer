@@ -12,4 +12,5 @@ public class TextMessageRoute extends RouteBuilder {
                 .to("mock:testQueue")
                 .log("Message sent to testQueue: ${body}");
     }
+    
 }

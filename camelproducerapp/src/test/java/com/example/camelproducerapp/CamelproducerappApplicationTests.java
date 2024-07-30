@@ -1,7 +1,5 @@
 package com.example.camelproducerapp;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
@@ -20,9 +18,11 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+// This annotation activates the "test" profile.
+// Profiles in Spring are used to segregate parts of your application
+// configuration and make it only available in certain environments.
 @ActiveProfiles("test")
 @Testcontainers
-
 class CamelproducerappApplicationTests {
 	private static Logger logger = LoggerFactory.getLogger(CamelproducerappApplicationTests.class);
 
@@ -33,7 +33,10 @@ class CamelproducerappApplicationTests {
 	private CamelContext camelContext;
 
 	@SuppressWarnings("resource")
+	// The container is started before the tests and stopped afterwards.
 	@Container
+	// GenericContainer is a generic Testcontainers class that allows you to run any
+	// Docker container.
 	private static final GenericContainer<?> activemqContainer = new GenericContainer<>(
 			DockerImageName.parse("rmohr/activemq:latest"))
 			.withExposedPorts(61616)
@@ -41,10 +44,7 @@ class CamelproducerappApplicationTests {
 
 	@BeforeEach
 	void setUp() {
-		assertNotNull(camelContext, "camelContext shouldn't be null");
-		assertNotNull(producerTemplate, " producerTemplate shouldn't be null");
 		MockEndpoint mockEndpoint = camelContext.getEndpoint("mock:testQueue", MockEndpoint.class);
-
 		mockEndpoint.reset();
 	}
 
@@ -59,9 +59,12 @@ class CamelproducerappApplicationTests {
 
 	@Test
 	void testMessageRoute() throws InterruptedException {
-		logger.info("start method ---------------------------------");
+		logger.info("start method ----------------------");
 		MockEndpoint mockEndpoint = camelContext.getEndpoint("mock:testQueue", MockEndpoint.class);
+		// sets the expectation that the mockEndpoint will receive one message.
 		mockEndpoint.expectedMessageCount(1);
+		// This sets the expectation that the body of the first message received by the
+		// mockEndpoint will be "Hello, this is a test message with Camel!".
 		mockEndpoint.message(0).body().isEqualTo("Hello, this is a test message with Camel!");
 
 		producerTemplate.sendBody("direct:start", "Hello, this is a test message with Camel!");

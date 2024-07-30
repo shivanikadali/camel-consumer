@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>consumerapp</artifactId>
+	<artifactId>camel-consumer-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>consumerapp</name>
+	<name>camel-consumer-app</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -39,12 +39,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-        <dependency>
+		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
 			<artifactId>camel-spring-boot-starter</artifactId>
-		<!-- as we add more number of dependencies related to camel its good to add dependency at 1 place -->
 			<version>${camel.version}</version>
-		</dependency>	
+		</dependency>
+        <dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-activemq-starter</artifactId>
+			<version>4.6.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -66,7 +70,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-activemq</artifactId>
 		</dependency>
-		<!-- tesing  -->
+		<!-- testing -->
 		<dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>testcontainers</artifactId>
@@ -90,13 +94,14 @@
 			<artifactId>camel-mock</artifactId>
 			<version>${camel.version}</version>
 		</dependency> -->
-        <dependency>
+		<dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.10.2</version>
             <scope>test</scope>
         </dependency>
-    </dependencies>
+	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -105,4 +110,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>
